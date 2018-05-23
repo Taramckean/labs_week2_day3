@@ -4,6 +4,7 @@ require("minitest/rg")
 require_relative("../drink.rb")
 require_relative("../customer.rb")
 require_relative("../pub.rb")
+require_relative("../food.rb")
 
 class CustomerTest < Minitest::Test
 
@@ -14,6 +15,7 @@ def setup
   @drink2 = Drink.new("Red wine", 5, 11)
   @drink3 = Drink.new("Vodka red bull", 6, 120)
   @pub = Pub.new("Molly Malones", [@drink1, @drink2, @drink3])
+  @food1 = Food.new("banana", 1, 30)
 end
 
 def test_customer_name
@@ -71,5 +73,12 @@ def test_customer_can_buy_drink_from_pub__drunk
   assert_equal(44,@customer1.customer_wallet_count)
   assert_equal(6, @pub.till_count)
 end
+
+def test_customer_sobers_with_food
+  @customer1.take_drink_from_pub(@pub, @drink3)
+  @customer1.eats_food(@food1)
+  assert_equal(90, @customer1.drunkenness_level_check)
+end
+
 
 end

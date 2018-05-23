@@ -42,5 +42,8 @@ class Customer
    end
   end
 
+  def eats_food(food)
+    @drunkenness -= food.rejuvination
+  end
 
 end
